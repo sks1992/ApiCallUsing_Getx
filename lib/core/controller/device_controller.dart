@@ -19,7 +19,7 @@ class DeviceController extends GetxController {
     var result = await appApi.getDeviceData();
     if (result.device.isEmpty) {
       isLoading.value = false;
-      errorMessage.value = "Something Went Wrong";
+      errorMessage.value = "Something Went Wrong With Api";
     } else {
       isLoading.value = false;
       deviceList.value = result.device;

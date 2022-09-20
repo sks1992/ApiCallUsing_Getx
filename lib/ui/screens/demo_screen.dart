@@ -23,16 +23,33 @@ class DemoScreen extends StatelessWidget {
                   child: CircularProgressIndicator(
                   color: Colors.blue,
                 ))
-              : ListView.builder(
-                  itemCount: controller.deviceList.length,
-                  itemBuilder: (context, index) {
-                    var data = controller.deviceList[index];
-                    return CustomCard(
-                      deviceName: data.deviceName,
-                      deviceType: data.deviceType,
-                      userId: data.userId,
-                    );
-                  }),
+              : controller.errorMessage.value != ""
+                  ? Center(
+                      child: Container(
+                        width: Get.width-20,
+                        height: 30,
+                        decoration:  BoxDecoration(
+                            color: Colors.red,
+                          borderRadius: BorderRadius.circular(15.0)
+                        ),
+                        child: Obx(
+                          () => Center(
+                            child: Text(controller.errorMessage.value),
+                          ),
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: controller.deviceList.length,
+                      itemBuilder: (context, index) {
+                        var data = controller.deviceList[index];
+                        return CustomCard(
+                          deviceName: data.deviceName,
+                          deviceType: data.deviceType,
+                          userId: data.userId,
+                        );
+                      },
+                    ),
         ),
       ),
     );
